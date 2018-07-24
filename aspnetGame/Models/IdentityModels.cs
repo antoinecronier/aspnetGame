@@ -23,6 +23,7 @@ namespace shanuMVCUserRoles.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            this.Database.Initialize(false);
         }
 
         public static ApplicationDbContext Create()

@@ -1,0 +1,10 @@
+﻿@model gameClassLibrary.Models.SolarSystems.Planet
+
+@{
+    Layout = "~/Views/Admin/Create.cshtml";
+    ViewBag.Deep = 2;
+}
+
+@{
+    Html.RenderPartial("CreateBase", Model);
+}

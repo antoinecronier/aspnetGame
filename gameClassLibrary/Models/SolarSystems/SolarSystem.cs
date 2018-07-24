@@ -8,5 +8,6 @@ namespace gameClassLibrary.Models.SolarSystems
     public class SolarSystem : ModelBase
     {
         public String Name { get; set; }
+        public List<Planet> Planets { get; set; }
     }
 }

@@ -12,9 +12,17 @@ namespace gameClassLibrary.Database
 {
     public class GameDBContext : DbContext
     {
+        /// <summary>
+        /// If database .mdf file cannot attach use :
+        /// sqllocaldb.exe stop
+        /// sqllocaldb.exe delete
+        /// sqllocaldb.exe start
+        /// </summary>
         public GameDBContext()
            : base("GameConnection")
         {
+            this.Database.CreateIfNotExists();
+            this.Database.Initialize(true);
         }
 
         #region ConcretBuilding
