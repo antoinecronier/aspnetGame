@@ -22,7 +22,11 @@ namespace gameClassLibrary.Database
            : base("GameConnection")
         {
             this.Database.CreateIfNotExists();
-            this.Database.Initialize(true);
+            if (!this.Database.CompatibleWithModel(false))
+            {
+                this.Database.Delete();
+                this.Database.CreateIfNotExists();
+            }
         }
 
         #region ConcretBuilding

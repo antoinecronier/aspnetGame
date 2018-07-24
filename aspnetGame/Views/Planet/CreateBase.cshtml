@@ -1,4 +1,6 @@
-﻿@model gameClassLibrary.Models.SolarSystems.Planet
+﻿@using System.Reflection
+@using gameClassLibrary.Models.SolarSystems
+@model gameClassLibrary.Models.SolarSystems.Planet
 
 @{
     ViewBag.Deep--;
@@ -24,7 +26,21 @@
         <div class="form-group">
             @Html.LabelFor(model => property.DisplayName, property.PropertyName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => property.DisplayName, property.PropertyName, new { htmlAttributes = new { @class = "form-control" } })
+                @*.GetValue(Model)
+        GetProperty(property.PropertyName).GetMethod.Invoke(Model,new object[] { })
+        Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions
+                *@
+                @{
+                    Planet planet = new Planet();
+                    PropertyInfo propertyInfo = planet.GetType().GetProperty(property.PropertyName);
+                    object item = propertyInfo.GetMethod.Invoke(planet, new object[] { });
+                    if (item == null)
+                    {
+                        String s = " ";
+                        item = s;
+                    }
+                }
+                @Html.EditorFor(model => item, null, property.DisplayName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => property.PropertyName, "", new { @class = "text-danger" })
             </div>
         </div>

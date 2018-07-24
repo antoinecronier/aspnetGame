@@ -11,6 +11,9 @@ namespace gameClassLibrary.Models.SolarSystems
         [Display(Name = "Name")]
         public String Name { get; set; }
 
+        [Display(Name = "AvaiblePlace")]
+        public int AvaiblePlace { get; set; }
+
         [Display(Name = "SolarSystem")]
         public SolarSystem SolarSystem { get; set; }
     }
