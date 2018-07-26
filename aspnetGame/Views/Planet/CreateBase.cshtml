@@ -1,48 +1,26 @@
-﻿@using System.Reflection
-@using gameClassLibrary.Models.SolarSystems
-@model gameClassLibrary.Models.SolarSystems.Planet
+﻿@model gameClassLibrary.Models.SolarSystems.Planet
 
-@{
-    ViewBag.Deep--;
-}
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+</div>
 
-@foreach (var property in ViewData.ModelMetadata.Properties)
-{
-    if (property.IsComplexType && ViewBag.Deep >= 1)
-    {
-        <div class="form-group">
-            @Html.LabelFor(model => property.DisplayName, property.PropertyName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @{
-                    Html.RenderPartial("../" + property.PropertyName + "/CreateBase", property.ModelType.GetConstructor(new Type[] { }).Invoke(null));
-                }
-            </div>
-        </div>
+<div class="form-group">
+    @Html.LabelFor(model => model.AvaiblePlace, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.AvaiblePlace, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.AvaiblePlace, "", new { @class = "text-danger" })
+    </div>
+</div>
 
-    }
-    else if (property.PropertyName != "Id")
-    {
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => property.DisplayName, property.PropertyName, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*.GetValue(Model)
-        GetProperty(property.PropertyName).GetMethod.Invoke(Model,new object[] { })
-        Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions
-                *@
-                @{
-                    Planet planet = new Planet();
-                    PropertyInfo propertyInfo = planet.GetType().GetProperty(property.PropertyName);
-                    object item = propertyInfo.GetMethod.Invoke(planet, new object[] { });
-                    if (item == null)
-                    {
-                        String s = " ";
-                        item = s;
-                    }
-                }
-                @Html.EditorFor(model => item, null, property.DisplayName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => property.PropertyName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-    }
-}
+<div class="form-group">
+    @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+    </div>
+</div>

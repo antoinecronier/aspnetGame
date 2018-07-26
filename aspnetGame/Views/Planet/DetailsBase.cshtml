@@ -1,0 +1,32 @@
+﻿@model gameClassLibrary.Models.SolarSystems.Planet
+
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.Name)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Name)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.AvaiblePlace)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.AvaiblePlace)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Image)
+    </dt>
+
+    <dd>
+        @if (Model.Image != "")
+        {
+            <img src="@Model.Image" alt="Sample Image" width="200px" height="200px" />
+        }
+    </dd>
+
+</dl>
+

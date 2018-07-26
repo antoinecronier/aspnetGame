@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -25,6 +27,10 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    @Html.Partial("_AdminPartial")
+                }
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

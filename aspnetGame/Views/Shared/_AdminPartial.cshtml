@@ -1,0 +1,33 @@
+﻿<div class="navbar-right">
+    <ul nav navbar-nav navbar-right>
+        @{
+                        List<SelectListItem> listItems = new List<SelectListItem>();
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Solar system",
+                            Value = "SolarSystem"
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Planet",
+                            Value = "Planet",
+                            Selected = true
+                        });
+                        listItems.Add(new SelectListItem
+                        {
+                            Text = "Exemplo3",
+                            Value = "Exemplo3"
+                        });
+        }
+        <li>
+            <select ONCHANGE="location = this.options[this.selectedIndex].value;">
+                <option disabled selected> -- Admin Edition -- </option>
+                @foreach (var item in listItems)
+                {
+                    String hrefValue = @item.Value + "/Index";
+                    <option value=@hrefValue>@item.Text</option>
+                }
+            </select>
+        </li>
+    </ul>
+</div>

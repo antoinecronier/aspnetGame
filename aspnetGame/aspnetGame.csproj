@@ -175,6 +175,7 @@
     <Compile Include="Controllers\Authentication\ManageController.cs" />
     <Compile Include="Controllers\Authentication\RoleController.cs" />
     <Compile Include="Controllers\Authentication\UsersController.cs" />
+    <Compile Include="Controllers\Extensions\RequireRequestValueAttribute.cs" />
     <Compile Include="Controllers\PlanetController.cs" />
     <Compile Include="Controllers\SolarSystemController.cs" />
     <Compile Include="Global.asax.cs">
@@ -248,9 +249,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Planet\Index.cshtml" />
     <Content Include="Views\Planet\Delete.cshtml" />
-    <Content Include="Views\Planet\Details.cshtml" />
     <Content Include="Views\Planet\Edit.cshtml" />
-    <Content Include="Views\Planet\Create.cshtml" />
     <Content Include="Views\SolarSystem\Create.cshtml" />
     <Content Include="Views\SolarSystem\Delete.cshtml" />
     <Content Include="Views\SolarSystem\Details.cshtml" />
@@ -258,8 +257,13 @@
     <Content Include="Views\SolarSystem\Index.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Planet\CreateBase.cshtml" />
+    <Content Include="Views\Planet\Create.cshtml" />
     <Content Include="Views\SolarSystem\CreateBase.cshtml" />
-    <Content Include="Views\Admin\CreateBase.cshtml" />
+    <Content Include="Views\Shared\_AdminPartial.cshtml" />
+    <Content Include="Views\SolarSystem\PlanetSelectList.cshtml" />
+    <Content Include="Views\Planet\Details.cshtml" />
+    <Content Include="Views\Planet\DetailsBase.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

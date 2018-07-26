@@ -1,4 +1,5 @@
-﻿using gameClassLibrary.Database;
+﻿using aspnetGame.Controllers.Extensions;
+using gameClassLibrary.Database;
 using gameClassLibrary.Models.Base;
 using System;
 using System.Collections.Generic;
@@ -13,23 +14,24 @@ namespace aspnetGame.Controllers.Base
 {
     public class AdminControllerBase<T> : Controller where T : ModelBase , new()
     {
-        GameDBContext dbContext = new GameDBContext();
+        protected GameDBContext dbContext = new GameDBContext();
 
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             List<T> items = dbContext.Set<T>().ToList();
             return View(items);
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public virtual async Task<ActionResult> Create()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "")]T item)
+        [RequireRequestValue(new String[] {})]
+        public virtual async Task<ActionResult> Create([Bind(Include = "")]T item)
         {
             if (ModelState.IsValid)
             {
@@ -42,7 +44,7 @@ namespace aspnetGame.Controllers.Base
         }
 
         [HttpGet]
-        public async Task<ActionResult> Delete(int? id)
+        public virtual async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -58,7 +60,7 @@ namespace aspnetGame.Controllers.Base
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int? id)
+        public virtual async Task<ActionResult> DeleteConfirmed(int? id)
         {
             T item = await dbContext.Set<T>().FindAsync(id);
             if (item != null)
@@ -71,7 +73,7 @@ namespace aspnetGame.Controllers.Base
         }
 
         [HttpGet]
-        public async Task<ActionResult> Edit(int? id)
+        public virtual async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -88,7 +90,7 @@ namespace aspnetGame.Controllers.Base
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "")] T item)
+        public virtual async Task<ActionResult> Edit([Bind(Include = "")] T item)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +103,7 @@ namespace aspnetGame.Controllers.Base
         }
 
         [HttpGet]
-        public async Task<ActionResult> Details(int? id)
+        public virtual async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {

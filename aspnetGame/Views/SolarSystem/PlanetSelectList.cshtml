@@ -1,0 +1,46 @@
+﻿@using gameClassLibrary.Models.SolarSystems
+
+<script>
+    function addToInput(subItemId, id) {
+        var array = [];
+        if (document.getElementById(subItemId).style.backgroundColor === "") {
+            if (document.getElementById('planetsInput').value != "") {
+                array.push(document.getElementById('planetsInput').value);
+            }
+            array.push(id);
+            document.getElementById('planetsInput').value = array;
+            document.getElementById(subItemId).style.backgroundColor = "red";
+        } else {
+            array = document.getElementById('planetsInput').value;
+            array = array.split(",");
+            var index = array.indexOf(id+'');
+            console.log(index,id);
+            array = array.filter((e, i) => i !== index);
+            console.log(array);
+            document.getElementById('planetsInput').value = array;
+            document.getElementById(subItemId).style.backgroundColor = "";
+        }
+    }
+</script>
+
+<div id="selected" class="row">
+    <input id="planetsInput" type="hidden" name="Planets" value="" />
+</div>
+
+<div id="notSelected" class="row">
+    @{
+        int loop = 0;
+        foreach (Planet item in ViewBag.Planets)
+        {
+            String divId = "planet" + loop;
+            <div id=@divId class="col-md-4 selectable"
+                 onclick="addToInput('@divId',@item.Id)">
+                @{
+                    Html.RenderPartial("../Planet/DetailsBase", item);
+                }
+            </div>
+            loop++;
+        }
+    }
+</div>
+

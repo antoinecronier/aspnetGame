@@ -5,23 +5,48 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm())
+@if (ViewBag.FormAction != null && ViewBag.FormController != null)
 {
-    @Html.AntiForgeryToken()
+    using (Html.BeginForm((String)ViewBag.FormAction, (String)ViewBag.FormController))
+    {
+        @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>@ViewBag.TitleItem</h4>
-        <hr />
+        <div class="form-horizontal">
+            <h4>@ViewBag.TitleItem</h4>
+            <hr />
 
-        @RenderBody()
+            @RenderBody()
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
             </div>
         </div>
-    </div>
+    }
 }
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>@ViewBag.TitleItem</h4>
+            <hr />
+
+            @RenderBody()
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
 
 <div>
     @Html.ActionLink("Back to List", "Index")
