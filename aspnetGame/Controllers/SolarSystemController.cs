@@ -28,13 +28,15 @@ namespace aspnetGame.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [RequireRequestValue(new String[] { "Planets" })]
-        public Task<ActionResult> CreateWithPlanets([Bind(Include = "")] SolarSystem item, int[] Planets)
+        public async Task<ActionResult> CreateWithPlanets([Bind(Include = "")] SolarSystem item, string Planets)
         {
-            foreach (int id in Planets)
+            foreach (string id in Planets.Split(','))
             {
-                item.Planets.Add(dbContext.Planets.Find(id));
+                item.Planets.Add(dbContext.Planets.Find(long.Parse(id)));
             }
-            return base.Create(item);
+            dbContext.SolarSystems.Add(item);
+            await dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
     }
 }

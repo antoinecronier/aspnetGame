@@ -24,7 +24,7 @@
                 <option disabled selected> -- Admin Edition -- </option>
                 @foreach (var item in listItems)
                 {
-                    String hrefValue = @item.Value + "/Index";
+                    String hrefValue = "/"+@item.Value + "/Index";
                     <option value=@hrefValue>@item.Text</option>
                 }
             </select>
