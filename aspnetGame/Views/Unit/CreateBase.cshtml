@@ -1,0 +1,38 @@
+﻿@model gameClassLibrary.Models.Units.Unit
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<script>
+    function UpdateRealUnit(value) {
+        if (value === 'Worker') {
+            document.getElementById('worker').style.visibility = 'visible';
+            document.getElementById('medic').style.visibility = 'hidden';
+        } else if (value === 'Medic') {
+            document.getElementById('worker').style.visibility = 'hidden';
+            document.getElementById('medic').style.visibility = 'visible';
+        }
+    }
+</script>
+
+<div class="form-group">
+    @Html.Label("Unit type", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("UnitTypes", (SelectList)@ViewBag.UnitTypes, htmlAttributes: new { @onchange = "UpdateRealUnit(this.value)" })
+    </div>
+</div>
+
+<div id="worker" class="form-group">
+    @Html.Partial("../Worker/CreateBase", Model)
+    @Html.Partial("../Worker/ResourceSelectList")
+</div>
+
+<div id="medic" class="form-group">
+    @Html.Partial("../Medic/CreateBase",Model)
+</div>

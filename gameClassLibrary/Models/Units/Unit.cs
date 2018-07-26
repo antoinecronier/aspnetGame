@@ -8,5 +8,6 @@ namespace gameClassLibrary.Models.Units
 {
     public abstract class Unit : ModelBase, Buildable, Displayable
     {
+        public String Name { get; set; }
     }
 }

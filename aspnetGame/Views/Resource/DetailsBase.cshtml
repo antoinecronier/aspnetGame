@@ -1,0 +1,12 @@
+﻿@model gameClassLibrary.Models.Resources.Resource
+
+<dt>
+    @Html.DisplayFor(model => model.Name)
+</dt>
+
+<dd>
+    @if (Model.ImageURL != "")
+    {
+        <img src="@Model.ImageURL" alt="Sample Image" width="100px" height="80px" />
+    }
+</dd>

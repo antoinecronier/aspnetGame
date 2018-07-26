@@ -1,5 +1,6 @@
 ﻿using gameClassLibrary.Models;
 using gameClassLibrary.Models.Buildings.ConcretBuildings;
+using gameClassLibrary.Models.Resources;
 using gameClassLibrary.Models.Resources.ConcretResources;
 using gameClassLibrary.Models.SolarSystems;
 using gameClassLibrary.Models.Units.ConcretUnits;
@@ -37,6 +38,7 @@ namespace gameClassLibrary.Database
         public DbSet<WaterStation> WaterStations { get; set; }
         #endregion
         #region Resources
+        public DbSet<Resource> Resources { get; set; }
         #endregion
         #region SolarSystem
         public DbSet<Planet> Planets { get; set; }

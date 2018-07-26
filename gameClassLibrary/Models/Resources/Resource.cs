@@ -6,7 +6,10 @@ using System.Text;
 
 namespace gameClassLibrary.Models.Resources
 {
-    public abstract class Resource : Displayable
+    public class Resource : ModelBase, Displayable
     {
+        public String Name { get; set; }
+        public Double Quantity { get; set; }
+        public String ImageURL { get; set; }
     }
 }
