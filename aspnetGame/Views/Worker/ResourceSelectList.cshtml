@@ -80,34 +80,29 @@
             var names = document.querySelectorAll('#selectedResources > div > div > #resourceName');
             var urls = document.querySelectorAll('#selectedResources > div > div #resourceImage');
             var result = [];
+            //var result = "";
             for (var i = 0; i < ids.length; i++) {
                 var item = {
                     Id: ids[i].innerHTML.trim(),
                     Name: names[i].innerHTML.trim(),
                     ImageURL: urls[i].getAttribute('src')
                 };
-                console.log(item);
                 result.push(item);
+                //var item = '<tr><td name = "Id" >' + ids[i].innerHTML.trim()+'</td><td name="Name">' + names[i].innerHTML.trim()+'</td><td name="ImageURL">'+urls[i].getAttribute('src')+'</td></tr >'
+                //result += item;
             }
 
-            console.log(result);
-
             document.getElementById('resourceList').value = JSON.stringify(result);
-
-            console.log(document.getElementById('resourceList').value);
-            //document.querySelector('#resourceList').
-            
-            //$selectedResources.children('div').each(function (item) {
-            //    //console.log($(".resourceId").text());
-            //    console.log($(item).find('#resourceName').text());
-            //    console.log($(item).find("#resourceImage").text());
-            //})
+            //document.getElementById('resourceList').innerHTML = result;
         });
     });
     
 </script>
 
-<input id="resourceList" name="resources" style="visibility:collapse" value=""/>
+<input id="resourceList" name="resources" style="visibility:hidden" value=""/>
+
+@*<table id="resourceList">
+</table>*@
 
 <a class="btn btn-primary" data-toggle="modal" data-target=".bootstrapmodal" data-whatever="">Select resources</a>
 

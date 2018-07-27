@@ -11,6 +11,8 @@ using gameClassLibrary.Database;
 using gameClassLibrary.Models.Units;
 using gameClassLibrary.Models.Units.ConcretUnits;
 using gameClassLibrary.Models.Resources;
+using aspnetGame.Controllers.Extensions;
+using Newtonsoft.Json;
 
 namespace aspnetGame.Controllers
 {
@@ -55,25 +57,73 @@ namespace aspnetGame.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id")] Unit unit, List<Resource> resources)
+        [RequireRequestValue(new String[] { "resources" })]
+        public async Task<ActionResult> Create([Bind(Include = "Id")] Unit worker, string resources)
         {
             if (ModelState.IsValid)
             {
-                if (unit is Worker)
+                if (resources != "")
                 {
-                    (unit as Worker).CollectableResources = resources;
-                    db.Workers.Add(unit as Worker);
+                    List<Resource> collectableResource = JsonConvert.DeserializeObject<List<Resource>>(resources);
+                    foreach (var item in collectableResource)
+                    {
+                        Resource realResource = db.Resources.First(x => x.Id == item.Id);
+                        db.Resources.Attach(realResource);
+                        worker.CollectableResources.Add(realResource);
+                    }
                 }
-                else if (unit is Medic)
-                {
-                    db.Medics.Add(unit as Medic);
-                }
-                
+
+                db.Workers.Add(worker);
+
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(unit);
+            ViewBag.UnitTypes = new SelectList(new List<String> { "Worker", "Medic" });
+            ViewBag.AvaibleResources = await db.Resources.ToListAsync();
+
+            return View((Unit)worker);
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[RequireRequestValue(new String[] { "resources" })]
+        //public async Task<ActionResult> Create([Bind(Include = "Id")] Worker worker, List<Resource> resources)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        foreach (var item in resources)
+        //        {
+        //            Resource realResource = db.Resources.First(x => x.Id == item.Id);
+        //            db.Resources.Attach(realResource);
+        //            worker.CollectableResources.Add(realResource);
+        //        }
+
+        //        db.Workers.Add(worker);
+
+        //        await db.SaveChangesAsync();
+        //        return RedirectToAction("Index");
+        //    }
+
+        //    ViewBag.UnitTypes = new SelectList(new List<String> { "Worker", "Medic" });
+        //    ViewBag.AvaibleResources = await db.Resources.ToListAsync();
+
+        //    return View((Unit)worker);
+        //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [RequireRequestValue(new String[] { "" })]
+        public async Task<ActionResult> Create([Bind(Include = "Id")] Medic medic)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Medics.Add(medic);
+
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View((Unit)medic);
         }
 
         [HttpGet]

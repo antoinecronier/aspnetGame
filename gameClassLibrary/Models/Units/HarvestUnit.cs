@@ -9,5 +9,10 @@ namespace gameClassLibrary.Models.Units
     {
         public List<Resource> CollectableResources { get; set; }
         public Double ResourceByTime { get; set; }
+
+        public HarvestUnit()
+        {
+            this.CollectableResources = new List<Resource>();
+        }
     }
 }
