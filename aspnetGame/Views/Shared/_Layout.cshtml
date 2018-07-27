@@ -11,8 +11,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
-    @RenderSection("scripts", required: true)
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -48,3 +46,6 @@
     </div>
 </body>
 </html>
+
+
+@RenderSection("scripts", required: false)

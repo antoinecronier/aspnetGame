@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace aspnetGame.Controllers.Base
 {
+    [Authorize(Roles = "Admin")]
     public class AdminControllerBase<T> : Controller where T : ModelBase , new()
     {
         protected GameDBContext dbContext = new GameDBContext();
